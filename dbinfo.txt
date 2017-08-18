@@ -1,0 +1,2 @@
+mongodb user:root
+mongodb pass:tjUHLw80VdYE

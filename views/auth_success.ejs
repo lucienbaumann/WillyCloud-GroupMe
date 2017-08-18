@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="semantic/public/semantic.min.css">
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<h1><%= title %></h1>
+<div class="ui middle aligned divided list">
+    <% for (var i=0; i < groups.length; i++){ %>
+        <div class="item">
+            <div class="right floated content">
+                <form id="<%= groups[i].id%>" class="group_add">
+                    <button type="submit" class="ui button">Add</button>
+                </form>
+            </div>
+            <img class="ui avatar image" src="<%= groups[i].image_url%>">
+            <div class="content">
+                <%= groups[i].name %>
+            </div>
+        </div>
+    <% } %>
+</div>
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="semantic/public/semantic.min.js"></script>
+<script>
+    (function($){
+        function processForm( e ){
+            e.preventDefault();
+            console.log(e);
+            var which_button = this.elements[0];
+            $.ajax({
+                url: 'add_to_group',
+                dataType: 'text',
+                type: 'post',
+                contentType: 'application/x-www-form-urlencoded',
+                data: $(this).serialize(),
+                success: function( data, textStatus, jQxhr ){
+                    $(which_button).removeClass("ui loading button").addClass('ui disabled button');
+                    console.log(data);
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                    $(which_button).removeClass("ui loading button").addClass('ui disabled button');
+                    console.log(which_button);
+                    console.log( errorThrown );
+
+                }
+            })
+                .then();
+            $(which_button).removeClass("ui button").addClass('ui loading button');
+        }
+
+        $('.group_add').submit( processForm );
+    })(jQuery);
+</script>
+</body>
+</html>
