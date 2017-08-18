@@ -7,3 +7,4 @@ integrations:
       application_name: willycloud
       env_name: willycloud-groupme-env2
       region: us-east-1
+      
