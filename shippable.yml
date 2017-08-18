@@ -1,0 +1,9 @@
+integrations:
+  deploy:
+    - integrationName: "luke-aws"
+      type: aws
+      target: eb_paas
+      platform: "Node.js"
+      application_name: willycloud
+      env_name: willycloud-groupme-env2
+      region: us-east-1
